@@ -20,14 +20,12 @@ def main() -> None:
     parser.add_argument("user_prompt", type=str, help="User prompt")
     args = parser.parse_args()
 
+    messages = [
+        {"role": "user", "content": args.user_prompt},
+    ]
+
     response = client.chat.completions.create(
-        model="openrouter/free",
-        messages=[
-            {
-                "role": "user",
-                "content": args.user_prompt,
-            }
-        ],
+        model="openrouter/free", messages=messages
     )
 
     if not response.usage:
